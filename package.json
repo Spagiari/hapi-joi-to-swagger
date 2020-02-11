@@ -26,12 +26,12 @@
   "author": "Jocelyn Badgley <joc@twipped.com>",
   "license": "MIT",
   "devDependencies": {
+    "@hapi/joi": "~15.0.3",
     "eslint": "~5.0.1",
     "eslint-config-twipped": "~2.5.0",
     "eslint-plugin-node": "~6.0.0",
     "eslint-plugin-promise": "~3.8.0",
-    "@hapi/joi": "~15.0.3",
-    "tap": "~12.0.1",
+    "tap": "^14.10.6",
     "tapsuite": "~1.1.1"
   },
   "peerDependencies": {
