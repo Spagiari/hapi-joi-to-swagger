@@ -338,10 +338,24 @@ var parseAsType = {
     return swagger;
   },
 
-  lazy: schema => {
-    var swagger = {type: schema._flags.lazy()};
+  lazy: (schema, existingComponents, newComponentsByRef) => {
+    var innerSchema = schema._flags.lazy();
 
-    return swagger;
+    if (typeof innerSchema === 'string') {
+      return {type: innerSchema};
+    }
+
+    if (!innerSchema._swaggerParse) {
+      innerSchema._swaggerParse = true;
+
+      var swagger = parseAsType[innerSchema._type](
+        innerSchema,
+        existingComponents,
+        newComponentsByRef,
+      );
+      return swagger;
+    }
+    return {type: 'self'}
   },
 };
 

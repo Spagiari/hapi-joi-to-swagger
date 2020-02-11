@@ -504,4 +504,26 @@ suite('swagger converts', s => {
       },
     },
   );
+
+  const recursive = joi.object().keys({
+    a: joi.string(),
+    b: joi.string(),
+    c: joi.lazy(() => recursive),
+  });
+
+  simpleTest(recursive, {
+    type: 'object',
+    properties: {
+      a: {type: 'string'},
+      b: {type: 'string'},
+      c: {
+        type: 'object',
+        properties: {
+          a: {type: 'string'},
+          b: {type: 'string'},
+          c: {type: 'self'},
+        },
+      },
+    },
+  });
 });
